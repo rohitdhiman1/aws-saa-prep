@@ -108,12 +108,14 @@
 | Step | File |
 |---|---|
 | 📖 Read | [`concepts/storage.md`](../concepts/storage.md) |
-| 🔬 Lab | [`labs/s3-versioning-replication.md`](../labs/s3-versioning-replication.md) |
+| 🔬 Lab 1 | [`labs/s3-versioning-replication.md`](../labs/s3-versioning-replication.md) |
+| 🔬 Lab 2 | [`labs/ebs-efs-storage.md`](../labs/ebs-efs-storage.md) |
 | 🗺 Draw | [`diagrams/storage.md`](../diagrams/storage.md) |
 | ✅ Cheatsheet | [`cheatsheets/storage.md`](../cheatsheets/storage.md) |
 | 📝 Practice Qs | [`mock-exams/phase2.md`](../mock-exams/phase2.md) · target ≥ 70% |
 
-**What the lab covers:** Versioning · Delete markers · Lifecycle rules · CRR · SSE-KMS + CloudTrail · Pre-signed URLs · Static website hosting
+**Lab 1 covers:** Versioning · Delete markers · Lifecycle rules · CRR · SSE-KMS + CloudTrail · Pre-signed URLs · Static website hosting
+**Lab 2 covers:** EBS volume types (gp3 vs io2 vs st1) + benchmarks · EBS snapshots (cross-AZ, cross-region) · EFS shared mount across 2 instances · EFS lifecycle (IA tier) · EBS vs EFS vs FSx decision matrix
 
 ---
 
@@ -173,12 +175,16 @@
 | 🔬 Lab 1 | [`labs/vpc-peering.md`](../labs/vpc-peering.md) |
 | 🔬 Lab 2 | [`labs/vpc-troubleshooting.md`](../labs/vpc-troubleshooting.md) |
 | 🔬 Lab 3 | [`labs/vpc-endpoints.md`](../labs/vpc-endpoints.md) |
+| 🔬 Lab 4 | [`labs/transit-gateway.md`](../labs/transit-gateway.md) |
 | 🗺 Draw | [`diagrams/networking.md`](../diagrams/networking.md) |
 | ✅ Cheatsheet | [`cheatsheets/networking.md`](../cheatsheets/networking.md) |
 
 **Lab 1 covers:** Peer two VPCs · Update both route tables · Confirm non-transitivity · Test with a third VPC
 **Lab 2 covers:** 5 broken VPC scenarios — missing IGW route · wrong SG CIDR · NACL ephemeral port trap · NAT GW in wrong subnet · one-sided peering routes
 **Lab 3 covers:** Gateway endpoint for S3 (free, route-based) · Endpoint policy · Interface endpoint for SSM (PrivateLink, ENI-based) · Private DNS
+**Lab 4 covers:** Transit Gateway hub-and-spoke with 3 VPCs · Transitive routing (vs peering non-transitivity) · Route table isolation (block Prod↔Dev, allow both→Shared) · TGW vs Peering vs PrivateLink decision matrix
+
+> **Note:** The Transit Gateway lab is the most resource-intensive lab in this repo (3 VPCs, 3 EC2 instances, 1 TGW with 3 attachments). Budget ~$2–3 for a few hours. Clean up promptly.
 
 ---
 
@@ -211,11 +217,13 @@
 | Step | File |
 |---|---|
 | 📖 Read | [`concepts/messaging.md`](../concepts/messaging.md) |
-| 🔬 Lab | [`labs/sqs-sns-fanout.md`](../labs/sqs-sns-fanout.md) |
+| 🔬 Lab 1 | [`labs/sqs-sns-fanout.md`](../labs/sqs-sns-fanout.md) |
+| 🔬 Lab 2 | [`labs/kinesis-streaming.md`](../labs/kinesis-streaming.md) |
 | 🗺 Draw | [`diagrams/messaging.md`](../diagrams/messaging.md) |
 | ✅ Cheatsheet | [`cheatsheets/messaging.md`](../cheatsheets/messaging.md) |
 
-**What the lab covers:** SNS → dual SQS fan-out · Visibility timeout expiry · Trigger DLQ after 3 failures · SNS message filtering
+**Lab 1 covers:** SNS → dual SQS fan-out · Visibility timeout expiry · Trigger DLQ after 3 failures · SNS message filtering
+**Lab 2 covers:** Kinesis Data Streams (shards, partition keys, ordering) · CLI produce/consume · Lambda consumer (per-shard concurrency) · Firehose delivery to S3 · Streams vs Firehose vs SQS/SNS decision tree
 
 ---
 
