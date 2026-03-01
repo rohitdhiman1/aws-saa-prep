@@ -15,7 +15,7 @@
 | 3 | Databases | RDS/Aurora + DynamoDB/ElastiCache | 5–6 |
 | 4 | Networking Deep Dive | Advanced VPC + Edge/DNS/CDN | 7–8 |
 | 5 | Messaging · Analytics · Security | SQS/SNS/Kinesis + Glue/Athena + KMS | 9–10 |
-| 6 | Mock Exams | Full timed exams + weak-area review | 11–12 |
+| 6 | Mock Exams | Full timed exams + cost & DR labs + weak-area review | 11–12 |
 | 7 | Final Review | Cheatsheets + exam strategy | 13 |
 
 ---
@@ -89,6 +89,7 @@
 | 🔬 Lab 3 | [`labs/lambda-events.md`](../labs/lambda-events.md) |
 | 🔬 Lab 4 | [`labs/lambda-vpc.md`](../labs/lambda-vpc.md) |
 | 🔬 Lab 5 | [`labs/ecs-fargate.md`](../labs/ecs-fargate.md) |
+| 🔬 Lab 6 | [`labs/api-gateway-caching.md`](../labs/api-gateway-caching.md) |
 | 🗺 Draw | [`diagrams/compute.md`](../diagrams/compute.md) |
 | ✅ Cheatsheet | [`cheatsheets/compute.md`](../cheatsheets/compute.md) |
 
@@ -97,6 +98,7 @@
 **Lab 3 covers:** Lambda S3 trigger (async) · API Gateway trigger (sync) · Concurrency · Cold start observation
 **Lab 4 covers:** Lambda outside VPC vs inside VPC · NAT GW for internet · Lambda → RDS private access · SG rules
 **Lab 5 covers:** ECS cluster · Execution role vs task role · Fargate service behind ALB · ECS Exec · Service scaling
+**Lab 6 covers:** REST API stages · API caching (TTL, invalidation) · Throttling via usage plans + API keys · Stage variables
 
 ---
 
@@ -144,13 +146,15 @@
 |---|---|
 | 📖 Read | [`concepts/databases-nosql.md`](../concepts/databases-nosql.md) |
 | 🔬 Lab 1 | [`labs/dynamodb-table-gsi.md`](../labs/dynamodb-table-gsi.md) |
-| 🔬 Lab 2 | [`labs/elasticache-redis.md`](../labs/elasticache-redis.md) |
+| 🔬 Lab 2 | [`labs/dynamodb-global-tables.md`](../labs/dynamodb-global-tables.md) |
+| 🔬 Lab 3 | [`labs/elasticache-redis.md`](../labs/elasticache-redis.md) |
 | 🗺 Draw | [`diagrams/databases.md`](../diagrams/databases.md) |
 | ✅ Cheatsheet | [`cheatsheets/databases.md`](../cheatsheets/databases.md) |
 | 📝 Practice Qs | [`mock-exams/phase3.md`](../mock-exams/phase3.md) · target ≥ 70% |
 
 **Lab 1 covers:** Composite key table · Query vs Scan · Add GSI · Query GSI (eventual consistency only) · Enable Streams + Lambda trigger · TTL deletion
-**Lab 2 covers:** Redis cluster (cluster mode off) · Cache-aside pattern with Lambda + DynamoDB · Cache hit vs miss latency · Forced failover · Cluster mode on vs off
+**Lab 2 covers:** Global Tables multi-region replication · Bi-directional writes · Last-writer-wins conflict resolution · On-demand vs provisioned capacity
+**Lab 3 covers:** Redis cluster (cluster mode off) · Cache-aside pattern with Lambda + DynamoDB · Cache hit vs miss latency · Forced failover · Cluster mode on vs off
 
 ---
 
@@ -236,6 +240,8 @@
 | 🔬 Lab 1 | [`labs/kms-encryption.md`](../labs/kms-encryption.md) |
 | 🔬 Lab 2 | [`labs/waf-shield.md`](../labs/waf-shield.md) |
 | 🔬 Lab 3 | [`labs/guardduty-eventbridge.md`](../labs/guardduty-eventbridge.md) |
+| 🔬 Lab 4 | [`labs/ssm-parameter-store.md`](../labs/ssm-parameter-store.md) |
+| 🔬 Lab 5 | [`labs/cognito-federation.md`](../labs/cognito-federation.md) |
 | 🗺 Draw | [`diagrams/security.md`](../diagrams/security.md) |
 | ✅ Cheatsheet | [`cheatsheets/security.md`](../cheatsheets/security.md) |
 | 📝 Practice Qs | [`mock-exams/phase5.md`](../mock-exams/phase5.md) · target ≥ 75% |
@@ -243,6 +249,8 @@
 **Lab 1 covers:** Create CMK · SSE-KMS on S3 · Enforce via bucket policy · Read CloudTrail audit log · Secrets Manager vs SSM Parameter Store
 **Lab 2 covers:** WAF Web ACL on ALB · IP block · Rate-based rule · AWS Managed Rules (OWASP) · SQL injection test · Shield Standard vs Advanced
 **Lab 3 covers:** Enable GuardDuty · Generate sample findings · EventBridge rule on high-severity findings · Lambda auto-remediation (block attacker IP in SG) · Multi-account org pattern
+**Lab 4 covers:** Parameter Store hierarchy + SecureString · Session Manager (bastion-free EC2 access) · SSM Run Command · Patch Manager · Parameter Store vs Secrets Manager decision matrix
+**Lab 5 covers:** Cognito User Pool + hosted UI · JWT token inspection · API Gateway Cognito authorizer · Identity Pool for AWS credentials · SAML/social federation patterns
 
 ---
 
@@ -287,9 +295,14 @@
 |---|---|
 | ✅ Review all | All `cheatsheets/*.md` |
 | ✅ Cost focus | [`cheatsheets/cost.md`](../cheatsheets/cost.md) |
+| 🔬 Lab 1 | [`labs/cost-optimization.md`](../labs/cost-optimization.md) |
+| 🔬 Lab 2 | [`labs/backup-dr.md`](../labs/backup-dr.md) |
 | 🗺 Draw | DR patterns from memory: Pilot Light · Warm Standby · Multi-Site |
 | 📖 Read | AWS Well-Architected Framework — 6 pillars (docs.aws.amazon.com) |
 | 🐛 Final gaps | [`docs/bugbase.md`](bugbase.md) |
+
+**Lab 1 covers:** Spot Instances + allocation strategies · Reserved Instances vs Savings Plans · S3 Intelligent-Tiering + lifecycle cost ladder · Compute Optimizer · Cost Explorer · Data transfer cost patterns
+**Lab 2 covers:** AWS Backup plans (daily + cross-region) · On-demand backup + restore for RDS and EBS · DLM vs AWS Backup · DR patterns: Backup & Restore / Pilot Light / Warm Standby / Multi-Site Active-Active · RTO/RPO decision matrix
 
 ---
 
