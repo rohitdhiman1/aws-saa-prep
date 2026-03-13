@@ -8,33 +8,49 @@
 
 ## Phase Overview
 
-| Phase | Topics | Focus | Weeks |
-|---|---|---|---|
-| 1 | IAM · VPC Basics | Identity + core networking | 1–2 |
-| 2 | Compute · Storage | EC2/Lambda/containers + S3/EBS/EFS | 3–4 |
-| 3 | Databases | RDS/Aurora + DynamoDB/ElastiCache | 5–6 |
-| 4 | Networking Deep Dive | Advanced VPC + Edge/DNS/CDN | 7–8 |
-| 5 | Messaging · Analytics · Security | SQS/SNS/Kinesis + Glue/Athena + KMS | 9–10 |
-| 6 | Mock Exams | Full timed exams + cost & DR labs + weak-area review | 11–12 |
-| 7 | Final Review | Cheatsheets + exam strategy | 13 |
+| Phase | Topics | Weeks |
+|---|---|---|
+| 1 | IAM · VPC Basics | 1–2 |
+| 2 | Compute · Storage | 3–4 |
+| 3 | Databases (relational + NoSQL + caching) | 5–6 |
+| 4 | Advanced Networking · Edge/DNS/CDN | 7–8 |
+| 5 | Messaging · Analytics · Security · Monitoring · IaC · Governance | 9–10 |
+| 6 | Mock Exams · Cost & DR Labs · Weak-area review | 11–12 |
+| 7 | Final Review · Exam | 13 |
 
 ---
 
 ## Score Targets
 
-| Phase | Activity | Target |
-|---|---|---|
-| 1 | Phase 1 practice | ≥ 70% |
-| 2 | Phase 2 practice | ≥ 70% |
-| 3 | Phase 3 practice | ≥ 70% |
-| 4 | Phase 4 practice | ≥ 75% |
-| 5 | Phase 5 practice | ≥ 75% |
-| 6 | Mock exam #1 | ≥ 72% |
-| 6 | Mock exam #3 | ≥ 80% |
-| Exam | SAA-C03 | ≥ 720 / 1000 |
+| Milestone | Target |
+|---|---|
+| Phase 1 practice | ≥ 70% |
+| Phase 2 practice | ≥ 70% |
+| Phase 3 practice | ≥ 70% |
+| Phase 4 practice | ≥ 75% |
+| Phase 5 practice | ≥ 75% |
+| Mock exam #1 | ≥ 72% |
+| Mock exam #2 | ≥ 76% |
+| Mock exam #3 (official) | ≥ 80% |
+| SAA-C03 exam | ≥ 720 / 1000 |
 
 ---
 
+## How to use each section
+
+Every topic below follows the same pattern. Not all steps apply to every topic — just do the ones listed.
+
+| Icon | Step | What to do |
+|---|---|---|
+| 📖 | Read | Study the concept file end-to-end |
+| 🔬 | Lab | Hands-on in AWS console (follow the lab guide) |
+| 🗺 | Draw | Reproduce the diagram on paper or draw.io from memory, then check |
+| ✅ | Cheatsheet | Review the quick-reference card; fill in gaps from memory |
+| 📝 | Practice Qs | Timed quiz — log wrong answers in `docs/bugbase.md` |
+
+> Topics marked **(concept read only)** have no lab, diagram, or cheatsheet — just read the concept file and internalise the exam traps.
+
+---
 ---
 
 # Phase 1 — IAM & VPC Basics
@@ -68,10 +84,9 @@
 | ✅ Cheatsheet | [`cheatsheets/vpc-basics.md`](../cheatsheets/vpc-basics.md) |
 | 📝 Practice Qs | [`mock-exams/phase1.md`](../mock-exams/phase1.md) · target ≥ 70% |
 
-**What the lab covers:** Custom VPC · Public + private subnets · IGW · NAT Gateway · Route tables · Security Groups · NACLs
+**Lab covers:** Custom VPC · Public + private subnets · IGW · NAT Gateway · Route tables · Security Groups · NACLs
 
 ---
-
 ---
 
 # Phase 2 — Compute & Storage
@@ -118,7 +133,6 @@
 **Lab 2 covers:** EBS volume types (gp3 vs io2 vs st1) + benchmarks · EBS snapshots (cross-AZ, cross-region) · EFS shared mount across 2 instances · EFS lifecycle (IA tier) · EBS vs EFS vs FSx decision matrix
 
 ---
-
 ---
 
 # Phase 3 — Databases
@@ -159,7 +173,6 @@
 **Lab 3 covers:** Redis cluster (cluster mode off) · Cache-aside pattern with Lambda + DynamoDB · Cache hit vs miss latency · Forced failover · Cluster mode on vs off
 
 ---
-
 ---
 
 # Phase 4 — Networking Deep Dive
@@ -199,15 +212,16 @@
 | ✅ Cheatsheet | [`cheatsheets/networking.md`](../cheatsheets/networking.md) |
 | 📝 Practice Qs | [`mock-exams/phase4.md`](../mock-exams/phase4.md) · target ≥ 75% |
 
-**What the lab covers:** CloudFront + S3 OAC (private bucket) · Cache invalidation · Route 53 weighted routing · Route 53 failover routing + health check
+**Lab covers:** CloudFront + S3 OAC (private bucket) · Cache invalidation · Route 53 weighted routing · Route 53 failover routing + health check
 
 > **Architecture exercise:** Before starting the lab, draw a hybrid multi-VPC architecture from memory (VPC peering / TGW / DX / VPN). Check against `diagrams/networking.md`.
 
 ---
-
 ---
 
-# Phase 5 — Messaging, Analytics & Security
+# Phase 5 — Messaging, Analytics, Security & Operations
+
+*Weeks 9–10. Week 9 = Messaging (labs). Week 10 = everything else (Analytics, Security labs, then three concept reads).*
 
 ---
 
@@ -228,19 +242,20 @@
 ---
 
 ## Analytics
-*Week 10 · Part 1*
+*Week 10 — Day 1*
 
 | Step | File |
 |---|---|
 | 📖 Read | [`concepts/analytics.md`](../concepts/analytics.md) |
 | 🗺 Draw | [`diagrams/analytics.md`](../diagrams/analytics.md) |
+| ✅ Cheatsheet | [`cheatsheets/analytics.md`](../cheatsheets/analytics.md) |
 
-**Focus areas:** Athena partitioning (cost impact) · Glue crawler → Data Catalog · EMR node roles (core vs task) · Lake Formation permissions
+**Focus areas:** Athena partitioning (cost impact) · Glue crawler → Data Catalog · EMR node roles (core vs task) · Lake Formation permissions · Redshift vs Athena vs EMR decision tree
 
 ---
 
-## Security & Compliance
-*Week 10 · Part 2 · Phase 5 checkpoint*
+## Security
+*Week 10 — Days 2–4*
 
 | Step | File |
 |---|---|
@@ -250,9 +265,8 @@
 | 🔬 Lab 3 | [`labs/guardduty-eventbridge.md`](../labs/guardduty-eventbridge.md) |
 | 🔬 Lab 4 | [`labs/ssm-parameter-store.md`](../labs/ssm-parameter-store.md) |
 | 🔬 Lab 5 | [`labs/cognito-federation.md`](../labs/cognito-federation.md) |
-| 🗺 Draw | [`diagrams/security.md`](../diagrams/security.md) |
+| 🗺 Draw | [`diagrams/security.md`](../diagrams/security.md) — includes Cognito User Pool vs Identity Pool flow |
 | ✅ Cheatsheet | [`cheatsheets/security.md`](../cheatsheets/security.md) |
-| 📝 Practice Qs | [`mock-exams/phase5.md`](../mock-exams/phase5.md) · target ≥ 75% |
 
 **Lab 1 covers:** Create CMK · SSE-KMS on S3 · Enforce via bucket policy · Read CloudTrail audit log · Secrets Manager vs SSM Parameter Store
 **Lab 2 covers:** WAF Web ACL on ALB · IP block · Rate-based rule · AWS Managed Rules (OWASP) · SQL injection test · Shield Standard vs Advanced
@@ -262,6 +276,66 @@
 
 ---
 
+## Monitoring & Logging *(concept read only)*
+*Week 10 — Day 5*
+
+| Step | File |
+|---|---|
+| 📖 Read | [`concepts/monitoring-logging.md`](../concepts/monitoring-logging.md) |
+
+No lab or diagram for this topic — focus on internalising the exam traps below:
+- CloudWatch does NOT collect EC2 memory/disk by default (needs CloudWatch Agent)
+- CloudTrail is NOT real-time (~5 min lag); for real-time alerts: CloudTrail → CloudWatch Logs → Metric Filter → Alarm
+- VPC Flow Logs = metadata only, not packet contents
+- Log export to S3 via `CreateExportTask` takes up to 12 hours — use Subscription Filter → Firehose for near-real-time
+- X-Ray = distributed tracing across microservices (not CloudWatch)
+
+---
+
+## Infrastructure as Code *(concept read only)*
+*Week 10 — Day 6*
+
+| Step | File |
+|---|---|
+| 📖 Read | [`concepts/infrastructure-as-code.md`](../concepts/infrastructure-as-code.md) |
+
+No lab or diagram for this topic — focus on internalising the exam traps below:
+- `Resources` is the only required section in a CloudFormation template
+- Change Sets preview changes — they do NOT execute them
+- DeletionPolicy: `Snapshot` for RDS/EBS before stack deletion; `Retain` to keep resource
+- SAM and CDK both compile down to CloudFormation — they are not separate services
+- Nested stacks = coupled lifecycle; cross-stack references = independent lifecycle
+- Stack Sets = deploy to multiple accounts/regions
+
+---
+
+## Governance & Compliance *(concept read only)*
+*Week 10 — Day 7*
+
+| Step | File |
+|---|---|
+| 📖 Read | [`concepts/governance.md`](../concepts/governance.md) |
+
+No lab or diagram for this topic — focus on internalising the exam traps below:
+- SCPs do NOT grant permissions and do NOT apply to the management account
+- AWS Config = "is this resource compliant?" · CloudTrail = "who did what?"
+- Control Tower guardrails: preventive = SCP, detective = Config rule
+- Trusted Advisor full checks require Business or Enterprise support plan
+- Config Aggregator collects data, it does NOT push rules to member accounts
+
+---
+
+### Phase 5 Checkpoint
+*After completing all sections above*
+
+| Step | File |
+|---|---|
+| 📝 Practice Qs | [`mock-exams/phase5.md`](../mock-exams/phase5.md) · target ≥ 75% |
+| 🐛 Log gaps | [`docs/bugbase.md`](bugbase.md) |
+
+> The Phase 5 quiz covers Messaging, Analytics, and Security. If you score below 75%, review the relevant concept files before moving to Phase 6.
+
+---
 ---
 
 # Phase 6 — Mock Exams & Weak-Area Review
@@ -292,7 +366,7 @@
 | 🐛 Log gaps | [`docs/bugbase.md`](bugbase.md) |
 | 📖 Review | Targeted weak-domain review |
 
-**Compare scores vs Exam #1 — identify trends**
+**Target:** ≥ 76% · Compare scores vs Exam #1 — identify trends.
 
 ---
 
@@ -325,7 +399,6 @@
 **Target: ≥ 80% — if yes, you're ready.**
 
 ---
-
 ---
 
 # Phase 7 — Final Review & Exam
