@@ -100,3 +100,63 @@ ALB / API Gateway
       ▼
 Application (EC2 / Lambda)
 ```
+
+---
+
+## Diagram 5: Cognito — User Pools vs Identity Pools
+
+```
+                        AUTHENTICATION (Who are you?)
+                        ──────────────────────────────
+User (browser/mobile)
+      │
+      ▼
+Cognito User Pool
+  - Sign-up / Sign-in (hosted UI or custom)
+  - MFA, password policies
+  - Social IdP (Google, Facebook, Apple)
+  - SAML / OIDC federation (corporate AD)
+      │
+      ▼
+Returns JWT tokens:
+  ├── ID Token     (user attributes: email, name, groups)
+  ├── Access Token (scopes: API permissions)
+  └── Refresh Token (get new tokens without re-login)
+      │
+      ├──► API Gateway (Cognito Authorizer validates JWT)
+      │         │
+      │         ▼
+      │    Lambda / backend
+      │
+      ▼
+                        AUTHORISATION (What can you access?)
+                        ────────────────────────────────────
+Cognito Identity Pool (Federated Identities)
+  - Exchanges JWT (from User Pool) or IdP token
+    for temporary AWS credentials (STS)
+  - Maps to IAM Role:
+      ├── Authenticated role   → scoped AWS access
+      └── Unauthenticated role → guest access (optional)
+      │
+      ▼
+Temporary AWS Credentials (AccessKeyId, SecretKey, SessionToken)
+      │
+      ▼
+Direct AWS access: S3, DynamoDB, etc. (from mobile/browser)
+```
+
+### Quick Decision
+
+```
+"Users need to sign in"
+  └── Cognito User Pool (authentication → JWT)
+
+"App needs AWS credentials (S3, DynamoDB from client)"
+  └── Cognito Identity Pool (authorisation → STS temp creds)
+
+"Both sign-in AND AWS access"
+  └── User Pool → Identity Pool (JWT → temp creds)
+
+"Corporate SSO (SAML) to AWS Console"
+  └── IAM Identity Center (not Cognito)
+```
